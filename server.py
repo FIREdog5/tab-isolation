@@ -21,27 +21,18 @@ def hello_world():
 def give_page(subpath):
     """
     routing for all ui pages. Gives "page not found" if
-    the page isn't in UI_PAGES
+    the page isn't in UI_PAGES.
     """
+    print(subpath)
     if subpath[-1] == "/":
         subpath = subpath[:-1]
     if subpath in UI_PAGES:
         return render_template(subpath)
-    return "oops page not found"
+    return f"oops page not found {subpath}"
 
 @socketio.event
 def connect():
     print('Established socketio connection')
-
-@socketio.on('join')
-def handle_join(name, id):
-    join_room(id)
-    print(f'confirmed join: {(name, id)}')
-
-@socketio.on('ui-to-server')
-def ui_to_server(p, header, args=None):
-    if not password(p):
-        return
 
 if __name__ == "__main__":
     print("Hello, world!")

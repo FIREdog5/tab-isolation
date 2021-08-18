@@ -52,7 +52,7 @@ So long as our JavaScript is run before any other JavaScript on the page, this w
 
 ---
 
-Lastly we will tackle local storage. I originally wanted to solve this in a very similar manner to the cookies, where each key would receive the tab id as a prefix, however this solution was not foolproof. While overriding the `getItem`, `setItem`, `removeItem`, and `clear` methods of the `window.localStorage` prototype (`Storage.prototype`) was effective, these methods were not called when local storage was accessed via shorthand notation (such as `window.localStorage["auth_token"]`). This made the solution inconsistent and impractical. We can also eliminate the possibility of changing the url/path where the local storage is stored. While it is possible to circumvent the domain protections on local storage and create a custom sub domain for each tab, the same methods as before would need to be overwritten, and the shorthand notation poses the same issue.
+Lastly we will tackle local storage. I originally wanted to solve this in a very similar manner to the cookies, where each key would receive the tab id as a prefix, however this solution was not foolproof. While overriding the `getItem`, `setItem`, `removeItem`, and `clear` methods of the `window.localStorage` prototype (`Storage.prototype`) was effective, these methods were not called when local storage was accessed via shorthand notation (such as `window.localStorage["auth_token"]`). This made the solution inconsistent and impractical. We can also eliminate the possibility of changing the url/path where the local storage is stored. While it is possible to circumvent the same origin policy protections on local storage and create a custom sub domain for each tab, without a backend implementation the same methods as before would need to be overwritten and the shorthand notation poses the same issue.
 
 Ultimately I decided to go with an imperfect solution. By using session storage to hold all of local storage's values, we can leverage the previous solution to keep local storage separate.
 
@@ -65,3 +65,9 @@ Object.defineProperty(window, "localStorage", new (function () {
 ```
 
 This of course has a significant downside, where a key written to local storage would collide with a key with the same name in session storage and could cause data to be overwritten. A second less impactful downside to this solution is the reduced overall storage capacity. While local storage typically enjoys a larger size than session storage, now both are forced to share the memory allotted to session storage.
+
+---
+
+As one final note, I will mention an idea I had to solve cookie issue using just a little bit of a backend. By allowing the server to ignore a specific entry in a path, we can separate cookie paths. This would look something like `www.test.com/ignoreme1048205726/test.html`. Then, using the same solution for session storage as above, we also randomize the numbers in the ignored portion of the url when a duplicate tab or a new page is opened. I suspect that this new url is still allowed under the same origin policy, and so unfortunately local storage is not affected. In order to change local storage, the domain itself would need to be changed, for instance `www.6301746139.test.com/test.html`.
+
+I made a working implementation of my 3 solutions, which may be found [here](https://github.com/FIREdog5/tab-isolation/blob/main/static/isolation.js), along with a test server and page that uses all 3 data storage methods discussed above. Because I whipped this together very quickly, I have not included documentation or requirements, but I can provide them if you are interested.
