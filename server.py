@@ -17,19 +17,11 @@ socketio = SocketIO(app, async_mode="gevent", cors_allowed_origins="*")
 def hello_world():
     return 'Hello, World!'
 
-def password(_p):
-    """
-    checks to make sure p is the correct password
-    password protection not used in this project
-    """
-    return True
-
 @app.route('/<path:subpath>')
 def give_page(subpath):
     """
     routing for all ui pages. Gives "page not found" if
-    the page isn't in UI_PAGES, or prompts for password
-    if the page is password protected
+    the page isn't in UI_PAGES
     """
     if subpath[-1] == "/":
         subpath = subpath[:-1]
