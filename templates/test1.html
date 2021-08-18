@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="{{url_for('static', filename='isolation.js')}}"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.2/socket.io.js"
+    ></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{{url_for('static', filename='test.js')}}"></script>
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='bootstrap.min.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='test.css')}}"
+    />
+    <title>Isolation Tests</title>
+  </head>
+  <body onLoad="loadJumbotron()">
+    <div class="form-body">
+      <div class="form-inner">
+        <div class="form-group">
+          <label for="first name">First Name</label>
+          <input type="text" class="form-control" id="first_name" placeholder="John">
+        </div>
+        <div class="form-group">
+          <label for="last name">Last Name</label>
+          <input type="text" class="form-control" id="last_name" placeholder="Doe">
+        </div>
+        <button type="submit" class="btn btn-primary" onclick="submitName()">Submit</button>
+      </div>
+      </div>
+      <div class="display-body">
+        <div class="display-inner">
+          <div class="jumbotron">
+            <h1 id="name-placard"></h1>
+          </div>
+          <button type="submit" class="btn btn-primary" onclick="deleteCookies()">Delete Cookies</button>
+        </div>
+      </div>
+      <div class="form-body animal-form">
+        <div class="form-inner">
+          <div class="form-group">
+            <label for="first name">Favorite Animal</label>
+            <input type="text" class="form-control" id="favorite_animal" placeholder="Dog">
+          </div>
+          <button type="submit" class="btn btn-primary" onclick="submitAnimal()">Submit</button>
+        </div>
+        </div>
+        <div class="display-body animal-form">
+          <div class="display-inner">
+            <div class="jumbotron">
+              <h1 id="animal-placard"></h1>
+            </div>
+            <button type="submit" class="btn btn-primary" onclick="deleteSession()">Delete Session Data</button>
+          </div>
+        </div>
+        <div class="form-body food-form">
+          <div class="form-inner">
+            <div class="form-group">
+              <label for="first name">Favorite Food</label>
+              <input type="text" class="form-control" id="favorite_food" placeholder="Pasta">
+            </div>
+            <button type="submit" class="btn btn-primary" onclick="submitFood()">Submit</button>
+          </div>
+          </div>
+          <div class="display-body food-form">
+            <div class="display-inner">
+              <div class="jumbotron">
+                <h1 id="food-placard"></h1>
+              </div>
+              <button type="submit" class="btn btn-primary" onclick="deleteLocal()">Delete Local Data</button>
+            </div>
+          </div>
+  </body>
+</html>

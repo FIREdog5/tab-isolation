@@ -1,0 +1,41 @@
+.form-body {
+  margin-left: 25%;
+  margin-top: 20px;
+  height: auto;
+  width: 50%;
+  border: 2px;
+  border-style: solid;
+  border-radius: 1em;
+  border-color: lightgrey;
+}
+
+.form-inner {
+  margin: 20px;
+}
+
+.display-body {
+  margin-left: 25%;
+  margin-top: 20px;
+  height: auto;
+  width: 50%;
+  border: 2px;
+  border-style: solid;
+  border-radius: 1em;
+  border-color: lightgrey;
+}
+
+.display-inner {
+  margin: 20px;
+}
+
+.jumbotron {
+  text-align: center;
+}
+
+.animal-form {
+  background: #FF7F7F;
+}
+
+.food-form {
+  background: #ADD8E6;
+}
