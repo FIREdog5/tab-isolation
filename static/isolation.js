@@ -3,15 +3,15 @@ function onLoad() {
     window.sessionStorage.clear();
     window.sessionStorage["tab_id"] = String(Math.floor(Math.random() * 100000000 + 1000000000));
   }
-  window.tabId= window.sessionStorage["tab_id"];
+  window.tabId = window.sessionStorage["tab_id"];
   window.sessionStorage.removeItem("tab_id");
 
-  let cookieObj = Object.getOwnPropertyDescriptor(Document.prototype, 'cookie') ||
+  let cookieDesc = Object.getOwnPropertyDescriptor(Document.prototype, 'cookie') ||
                  Object.getOwnPropertyDescriptor(HTMLDocument.prototype, 'cookie');
 
   Object.defineProperty(document, 'cookie', {
-      get: modifiedGetCookie(cookieObj.get),
-      set: modifiedSetCookie(cookieObj.set),
+      get: modifiedGetCookie(cookieDesc.get),
+      set: modifiedSetCookie(cookieDesc.set)
   });
 
   Object.defineProperty(window, "localStorage", new (function () {
@@ -53,7 +53,7 @@ function modifiedGetCookie(oldFunction) {
   return getCookie;
 }
 
-onLoad();
 window.addEventListener("beforeunload", function (e) {
   window.sessionStorage["tab_id"] = window.tabId;
 });
+onLoad();
